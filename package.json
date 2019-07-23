@@ -1,0 +1,25 @@
+{
+    "name": "cloudflare-workers-kv-migrate",
+    "version": "1.0.0",
+    "license": "BSD-3-Clause",
+    "bin": {
+        "workers-kv-migrate": "bin/workers-kv-migrate"
+    },
+    "scripts": {
+        "test": "jest",
+        "format": "prettier --write \"./**/*.js\"",
+        "lint": "eslint './**/*.js'",
+        "setup": "./node_modules/.bin/sls deploy",
+        "teardown": "./node_modules/.bin/sls remove"
+    },
+    "dependencies": {
+        "node-fetch": "^2.6.0",
+        "serverless": "^1.44.1",
+        "serverless-cloudflare-workers": "^1.2.0"
+    },
+    "devDependencies": {
+        "eslint": "^5.16.0",
+        "jest": "^24.8.0",
+        "prettier": "1.17.1"
+    }
+}

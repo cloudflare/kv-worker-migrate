@@ -1,0 +1,25 @@
+service:
+  name: namespaceMigrator
+  config:
+    accountId: ${env:CLOUDFLARE_ACCOUNT_ID}
+    zoneId: ${env:CLOUDFLARE_ZONE_ID}
+
+provider:
+  name: cloudflare
+
+plugins:
+  - serverless-cloudflare-workers
+
+functions:
+  keyCopier:
+    name: namespacemigrationkeycopier
+    script: workers/copy_keys
+    resources:
+      kv:
+        - variable: FROM_NS
+          namespace: ${env:CLOUDFLARE_FROM_NS}
+        - variable: TO_NS
+          namespace: ${env:CLOUDFLARE_TO_NS}
+    events:
+      - http:
+          url: ${env:CLOUDFLARE_ZONE_NAME}/namespaceMigrationKeyCopier
